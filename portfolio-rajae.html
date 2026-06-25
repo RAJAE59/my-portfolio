@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rajae El Mimouni — Développeure Web PHP Full Stack</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F7F3EE;
+    --ink: #1A1612;
+    --rust: #B5451B;
+    --rust-light: #E8D5CC;
+    --rust-mid: #C96A43;
+    --warm-gray: #7A7068;
+    --divider: #D9CFC6;
+    --white: #FFFFFF;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 4rem;
+    background: rgba(247,243,238,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--divider);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none; color: var(--warm-gray);
+    font-size: 0.85rem; font-weight: 400; letter-spacing: 0.08em;
+    text-transform: uppercase; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--rust); }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 7rem 4rem 4rem;
+    gap: 4rem;
+  }
+  .hero-text { max-width: 540px; }
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem; color: var(--rust);
+    letter-spacing: 0.15em; text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  .hero-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    line-height: 1.05;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+  .hero-name em {
+    font-style: italic;
+    color: var(--rust);
+  }
+  .hero-subtitle {
+    font-size: 1.05rem; color: var(--warm-gray);
+    line-height: 1.7; margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+  .hero-cta {
+    display: inline-flex; gap: 1rem; flex-wrap: wrap;
+  }
+  .btn-primary {
+    background: var(--rust); color: var(--white);
+    padding: 0.85rem 2rem; border-radius: 2px;
+    text-decoration: none; font-size: 0.85rem;
+    font-weight: 500; letter-spacing: 0.05em;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--ink); transform: translateY(-2px); }
+  .btn-outline {
+    border: 1px solid var(--ink); color: var(--ink);
+    padding: 0.85rem 2rem; border-radius: 2px;
+    text-decoration: none; font-size: 0.85rem;
+    font-weight: 400; letter-spacing: 0.05em;
+    transition: all 0.2s;
+  }
+  .btn-outline:hover { background: var(--ink); color: var(--white); }
+
+  .hero-visual {
+    position: relative; display: flex;
+    justify-content: center; align-items: center;
+  }
+  .code-block {
+    background: var(--ink);
+    color: #F0E8DF;
+    padding: 2rem 2.5rem;
+    border-radius: 4px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.82rem; line-height: 1.85;
+    width: 100%; max-width: 420px;
+    box-shadow: 20px 20px 0 var(--rust-light);
+    position: relative;
+  }
+  .code-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 5px; }
+  .code-dots { margin-bottom: 1.2rem; }
+  .c-rust { color: var(--rust-mid); }
+  .c-green { color: #7EC8A4; }
+  .c-muted { color: #7A6F66; }
+  .c-yellow { color: #E8C97A; }
+
+  /* STATS */
+  #stats {
+    background: var(--ink);
+    padding: 3.5rem 4rem;
+    display: flex; gap: 0; 
+    border-top: 3px solid var(--rust);
+  }
+  .stat {
+    flex: 1; text-align: center;
+    padding: 0 2rem;
+    border-right: 1px solid #2E2924;
+  }
+  .stat:last-child { border-right: none; }
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem; color: var(--rust-mid);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.78rem; color: #8A8078;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    margin-top: 0.4rem;
+  }
+
+  /* SECTION BASE */
+  section { padding: 6rem 4rem; }
+  .section-header { margin-bottom: 4rem; }
+  .section-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem; color: var(--rust);
+    letter-spacing: 0.15em; text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    color: var(--ink); line-height: 1.1;
+  }
+
+  /* SKILLS */
+  #skills { background: var(--white); }
+  .skills-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+  }
+  .skill-card {
+    padding: 2rem;
+    border: 1px solid var(--divider);
+    border-radius: 2px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    position: relative; overflow: hidden;
+  }
+  .skill-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--rust);
+    transform: scaleY(0); transform-origin: bottom;
+    transition: transform 0.25s;
+  }
+  .skill-card:hover::before { transform: scaleY(1); }
+  .skill-card:hover { border-color: var(--rust-light); box-shadow: 4px 4px 0 var(--rust-light); }
+  .skill-card-icon { font-size: 1.5rem; margin-bottom: 1rem; }
+  .skill-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem; margin-bottom: 0.8rem; font-weight: 700;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    background: var(--cream);
+    color: var(--warm-gray);
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+    border: 1px solid var(--divider);
+  }
+  .tag {
+    background: var(--rust-light);
+    color: var(--rust);
+    border-color: var(--rust-light);
+  }
+
+  /* EXPERIENCE */
+  #experience { background: var(--cream); }
+  .timeline { position: relative; }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 9.5rem; top: 0; bottom: 0;
+    width: 1px; background: var(--divider);
+  }
+  .exp-item {
+    display: grid; grid-template-columns: 9rem 1fr;
+    gap: 0 3rem; margin-bottom: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid var(--divider);
+  }
+  .exp-item:last-child { border-bottom: none; margin-bottom: 0; }
+  .exp-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem; color: var(--warm-gray);
+    text-align: right; padding-top: 0.2rem;
+    line-height: 1.5;
+  }
+  .exp-dot {
+    position: absolute; left: -2rem;
+    width: 10px; height: 10px;
+    background: var(--rust); border-radius: 50%;
+    border: 2px solid var(--cream);
+    margin-top: 0.35rem;
+  }
+  .exp-body { position: relative; }
+  .exp-company {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem; font-weight: 700;
+    color: var(--ink); margin-bottom: 0.3rem;
+  }
+  .exp-techs {
+    display: flex; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 0.9rem;
+    margin-top: 0.4rem;
+  }
+  .exp-tasks { list-style: none; }
+  .exp-tasks li {
+    font-size: 0.9rem; color: var(--warm-gray);
+    padding-left: 1rem; position: relative;
+    margin-bottom: 0.4rem; line-height: 1.6;
+  }
+  .exp-tasks li::before {
+    content: '→'; position: absolute; left: 0;
+    color: var(--rust); font-size: 0.8rem;
+  }
+
+  /* EDUCATION */
+  #education { background: var(--white); }
+  .edu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+  .edu-card {
+    padding: 2rem; border: 1px solid var(--divider);
+    border-radius: 2px; position: relative;
+  }
+  .edu-year {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem; color: var(--rust);
+    letter-spacing: 0.1em; margin-bottom: 0.6rem;
+  }
+  .edu-degree {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem; font-weight: 700;
+    color: var(--ink); margin-bottom: 0.3rem; line-height: 1.3;
+  }
+  .edu-school { font-size: 0.85rem; color: var(--warm-gray); }
+
+  /* CONTACT */
+  #contact {
+    background: var(--ink); color: var(--cream);
+    text-align: center;
+  }
+  #contact .section-title { color: var(--cream); }
+  .contact-sub {
+    color: #8A8078; font-size: 1rem; margin: 1rem 0 2.5rem;
+  }
+  .contact-links { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; }
+  .contact-link {
+    display: flex; align-items: center; gap: 0.6rem;
+    color: var(--cream); text-decoration: none;
+    font-size: 0.9rem; border-bottom: 1px solid #3A3530;
+    padding-bottom: 0.2rem; transition: border-color 0.2s, color 0.2s;
+  }
+  .contact-link:hover { color: var(--rust-mid); border-color: var(--rust-mid); }
+  .contact-icon { font-size: 1rem; }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    border-top: 1px solid #2E2924;
+    padding: 1.5rem 4rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  footer p { font-size: 0.78rem; color: #5A5248; }
+  .footer-initials {
+    font-family: 'Playfair Display', serif;
+    color: var(--rust); font-size: 1rem;
+  }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 2rem; }
+    #hero { grid-template-columns: 1fr; padding: 6rem 2rem 3rem; }
+    .hero-visual { display: none; }
+    #stats { flex-direction: column; gap: 2rem; padding: 3rem 2rem; }
+    .stat { border-right: none; border-bottom: 1px solid #2E2924; padding-bottom: 1.5rem; }
+    .stat:last-child { border-bottom: none; }
+    section { padding: 4rem 2rem; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .timeline::before { left: 0; }
+    .exp-item { grid-template-columns: 1fr; }
+    .exp-date { text-align: left; padding-left: 1rem; }
+    .exp-dot { left: -5px; }
+    .edu-grid { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 0.5rem; padding: 1.5rem 2rem; }
+    .nav-links { gap: 1.5rem; }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .skill-card, .edu-card {
+      animation: fadeUp 0.4s ease both;
+    }
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#hero" class="nav-logo">R. El Mimouni</a>
+  <ul class="nav-links">
+    <li><a href="#skills">Compétences</a></li>
+    <li><a href="#experience">Expérience</a></li>
+    <li><a href="#education">Formation</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-text">
+    <p class="hero-eyebrow">Développeure Web · PHP · Full Stack</p>
+    <h1 class="hero-name">Rajae<br><em>El Mimouni</em></h1>
+    <p class="hero-subtitle">
+      Je conçois et développe des applications web dynamiques avec PHP, Laravel, Symfony et React.js — du back-end robuste jusqu'à l'interface utilisateur soignée.
+    </p>
+    <div class="hero-cta">
+      <a href="#experience" class="btn-primary">Voir mes projets</a>
+      <a href="#contact" class="btn-outline">Me contacter</a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="code-block">
+      <div class="code-dots">
+        <span class="code-dot" style="background:#FF5F57"></span>
+        <span class="code-dot" style="background:#FEBC2E"></span>
+        <span class="code-dot" style="background:#28C840"></span>
+      </div>
+      <span class="c-muted">// Rajae El Mimouni</span><br>
+      <span class="c-green">class</span> <span class="c-yellow">Developer</span> {<br>
+      &nbsp;&nbsp;<span class="c-green">string</span> <span class="c-rust">$name</span> = <span class="c-yellow">'Rajae'</span>;<br>
+      &nbsp;&nbsp;<span class="c-green">array</span> <span class="c-rust">$stack</span> = [<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="c-yellow">'PHP'</span>, <span class="c-yellow">'Laravel'</span>,<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="c-yellow">'Symfony'</span>, <span class="c-yellow">'React'</span>,<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="c-yellow">'Node.js'</span>, <span class="c-yellow">'MySQL'</span><br>
+      &nbsp;&nbsp;];<br><br>
+      &nbsp;&nbsp;<span class="c-green">function</span> <span class="c-rust">build</span>() {<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="c-muted">// passion + code = ✨</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="c-green">return</span> <span class="c-yellow">'something great'</span>;<br>
+      &nbsp;&nbsp;}<br>
+      }
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div id="stats">
+  <div class="stat">
+    <div class="stat-number">4+</div>
+    <div class="stat-label">Ans d'expérience</div>
+  </div>
+  <div class="stat">
+    <div class="stat-number">6</div>
+    <div class="stat-label">Entreprises</div>
+  </div>
+  <div class="stat">
+    <div class="stat-number">10+</div>
+    <div class="stat-label">Projets livrés</div>
+  </div>
+  <div class="stat">
+    <div class="stat-number">3</div>
+    <div class="stat-label">Langues</div>
+  </div>
+</div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header">
+    <p class="section-eyebrow">Expertise</p>
+    <h2 class="section-title">Compétences techniques</h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-card-icon">⚙️</div>
+      <div class="skill-card-title">Back-end</div>
+      <div class="skill-tags">
+        <span class="tag">PHP</span>
+        <span class="tag">Laravel</span>
+        <span class="tag">Symfony</span>
+        <span class="tag">Node.js</span>
+        <span class="tag">Nest.js</span>
+        <span class="tag">REST API</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-icon">🎨</div>
+      <div class="skill-card-title">Front-end</div>
+      <div class="skill-tags">
+        <span class="tag">React.js</span>
+        <span class="tag">HTML5</span>
+        <span class="tag">CSS3</span>
+        <span class="tag">JavaScript</span>
+        <span class="tag">Bootstrap</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-icon">🗄️</div>
+      <div class="skill-card-title">Bases de données</div>
+      <div class="skill-tags">
+        <span class="tag">MySQL</span>
+        <span class="tag">PostgreSQL</span>
+        <span class="tag">Oracle</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-icon">🧱</div>
+      <div class="skill-card-title">Conception & Modélisation</div>
+      <div class="skill-tags">
+        <span class="tag">UML</span>
+        <span class="tag">MERISE</span>
+        <span class="tag">MVC</span>
+        <span class="tag">WordPress</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-icon">🛠️</div>
+      <div class="skill-card-title">Outils & DevOps</div>
+      <div class="skill-tags">
+        <span class="tag">GitHub</span>
+        <span class="tag">Jira</span>
+        <span class="tag">Postman</span>
+        <span class="tag">FileZilla</span>
+        <span class="tag">MobaXterm</span>
+        <span class="tag">VS Code</span>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-card-icon">🌐</div>
+      <div class="skill-card-title">Langues</div>
+      <div class="skill-tags">
+        <span class="tag">Français</span>
+        <span class="tag">Arabe</span>
+        <span class="tag">Anglais</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header">
+    <p class="section-eyebrow">Parcours</p>
+    <h2 class="section-title">Expériences professionnelles</h2>
+  </div>
+  <div class="timeline">
+
+    <div class="exp-item">
+      <div class="exp-date">07/2024<br>06/2026</div>
+      <div class="exp-body">
+        <div class="exp-dot"></div>
+        <div class="exp-company">ZENITH Assurance — Rabat</div>
+        <div class="exp-techs">
+          <span class="tag">PHP</span><span class="tag">Laravel</span><span class="tag">Symfony</span><span class="tag">React.js</span><span class="tag">Nest.js</span><span class="tag">API</span>
+        </div>
+        <ul class="exp-tasks">
+          <li>Développement d'une application principale de gestion des fonctionnalités liées à l'assurance</li>
+          <li>Maintenance et ajout de nouvelles fonctionnalités à d'autres projets</li>
+          <li>Implémentation des APIs fournisseurs</li>
+          <li>Développement et maintenance de sites WordPress et PHP</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">07/2023<br>04/2024</div>
+      <div class="exp-body">
+        <div class="exp-dot"></div>
+        <div class="exp-company">VAR PARTENAIRES d'Assurance — Kénitra</div>
+        <div class="exp-techs">
+          <span class="tag">PHP</span><span class="tag">Laravel</span><span class="tag">JavaScript</span><span class="tag">Bootstrap</span><span class="tag">API</span>
+        </div>
+        <ul class="exp-tasks">
+          <li>Développement d'une plateforme CRM avec PHP et Laravel</li>
+          <li>Implémentation des APIs fournisseurs</li>
+          <li>Création, gestion et maintenance de sites web WordPress et PHP</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">12/2023<br>01/2024</div>
+      <div class="exp-body">
+        <div class="exp-dot"></div>
+        <div class="exp-company">HEDOMA GROUP — Kénitra</div>
+        <div class="exp-techs">
+          <span class="tag">PHP</span><span class="tag">Laravel</span><span class="tag">Symfony</span><span class="tag">JavaScript</span><span class="tag">Bootstrap</span>
+        </div>
+        <ul class="exp-tasks">
+          <li>Développement du site "MECF Ingénieur" dédié aux offres de recrutement</li>
+          <li>Développement du site "Rint-innt" pour la réservation d'hôtels</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">03/2023<br>11/2023</div>
+      <div class="exp-body">
+        <div class="exp-dot"></div>
+        <div class="exp-company">FONDATION CHEIKH ZAID — Rabat</div>
+        <div class="exp-techs">
+          <span class="tag">PHP</span><span class="tag">Symfony</span><span class="tag">JavaScript</span><span class="tag">Bootstrap</span>
+        </div>
+        <ul class="exp-tasks">
+          <li>Développement et maintenance de l'application principale UGOUV</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">11/2022<br>01/2023</div>
+      <div class="exp-body">
+        <div class="exp-dot"></div>
+        <div class="exp-company">intelife</div>
+        <div class="exp-techs">
+          <span class="tag">PHP</span><span class="tag">Laravel</span><span class="tag">JavaScript</span><span class="tag">Bootstrap</span>
+        </div>
+        <ul class="exp-tasks">
+          <li>Création de sites web dynamiques</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-date">06/2022</div>
+      <div class="exp-body">
+        <div class="exp-dot"></div>
+        <div class="exp-company">HCP — Stage de fin de formation</div>
+        <div class="exp-techs">
+          <span class="tag">VB.Net</span><span class="tag">Access</span>
+        </div>
+        <ul class="exp-tasks">
+          <li>Développement d'une application de gestion de stock informatique</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-header">
+    <p class="section-eyebrow">Formation</p>
+    <h2 class="section-title">Parcours académique</h2>
+  </div>
+  <div class="edu-grid">
+    <div class="edu-card">
+      <div class="edu-year">2024 — 2025</div>
+      <div class="edu-degree">Master Professionnelle — Ingénierie de conception et développement d'applications</div>
+      <div class="edu-school">École ORDICIEL, Rabat</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-year">2022 — 2023</div>
+      <div class="edu-degree">Licence Professionnelle — Ingénierie de conception et développement d'applications</div>
+      <div class="edu-school">École ORDICIEL, Rabat</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-year">Formation</div>
+      <div class="edu-degree">Technicien spécialisé en développement informatique</div>
+      <div class="edu-school">École ORDICIEL, Rabat</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-year">2019 — 2020</div>
+      <div class="edu-degree">Baccalauréat S.V.T</div>
+      <div class="edu-school">Ibn Hazam, Er-Rachidia</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header" style="margin-bottom:1rem">
+    <p class="section-eyebrow" style="color:var(--rust-mid)">Travaillons ensemble</p>
+    <h2 class="section-title">Me contacter</h2>
+  </div>
+  <p class="contact-sub">Disponible pour des projets freelance et des opportunités en CDI.</p>
+  <div class="contact-links">
+    <a href="tel:0616226243" class="contact-link">
+      <span class="contact-icon">📞</span> 0616 226 243
+    </a>
+    <a href="mailto:elmimounirajae59@gmail.com" class="contact-link">
+      <span class="contact-icon">✉️</span> elmimounirajae59@gmail.com
+    </a>
+    <a href="#" class="contact-link">
+      <span class="contact-icon">📍</span> Rabat, Maroc
+    </a>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Rajae El Mimouni · Développeure Web PHP Full Stack</p>
+  <span class="footer-initials">R.M</span>
+</footer>
+
+</body>
+</html>
