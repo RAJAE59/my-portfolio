@@ -308,6 +308,93 @@
     color: var(--rust); font-size: 1rem;
   }
 
+  /* PROJETS */
+#projets {
+  background: var(--white);
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.project-card {
+  border: 1px solid var(--divider);
+  padding: 2rem;
+  border-radius: 2px;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  background: var(--cream);
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--rust-light);
+  box-shadow: 6px 6px 0 var(--rust-light);
+}
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+
+.project-header h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  color: var(--ink);
+}
+
+.project-tag {
+  font-size: 0.7rem;
+  font-family: 'DM Mono', monospace;
+  color: var(--rust);
+  border: 1px solid var(--rust-light);
+  padding: 0.2rem 0.5rem;
+  border-radius: 2px;
+  background: var(--rust-light);
+}
+
+.project-desc {
+  font-size: 0.9rem;
+  color: var(--warm-gray);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.project-links {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.project-links a {
+  text-decoration: none;
+  font-size: 0.85rem;
+  color: var(--ink);
+  border-bottom: 1px solid transparent;
+  transition: 0.2s;
+}
+
+.project-links a:hover {
+  color: var(--rust);
+  border-bottom: 1px solid var(--rust);
+}
+
+/* responsive */
+@media (max-width: 900px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
   @media (max-width: 900px) {
     nav { padding: 1rem 2rem; }
     #hero { grid-template-columns: 1fr; padding: 6rem 2rem 3rem; }
@@ -405,7 +492,93 @@
 
 </div>
 
+<!-- PROJETS -->
+<section id="projets">
+  <div class="section-header">
+    <p class="section-eyebrow">Réalisations</p>
+    <h2 class="section-title">Projets développés</h2>
+  </div>
 
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-header">
+        <h3>ZENITH Assurance Platform</h3>
+        <span class="project-tag">Full Stack</span>
+      </div>
+      <p class="project-desc">
+        Application de gestion d’assurance avec CRM, gestion clients, devis et API fournisseurs.
+      </p>
+      <div class="project-tech">
+        <span class="tag">Laravel</span>
+        <span class="tag">PHP</span>
+        <span class="tag">React.js</span>
+        <span class="tag">API</span>
+      </div>
+      <div class="project-links">
+        <a href="#" target="_blank">🔗 Demo</a>
+        <a href="#" target="_blank">💻 Code</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <h3>CRM Assurance VAR</h3>
+        <span class="project-tag">Backend</span>
+      </div>
+      <p class="project-desc">
+        Plateforme CRM pour gestion des clients et contrats d’assurance.
+      </p>
+      <div class="project-tech">
+        <span class="tag">Laravel</span>
+        <span class="tag">Bootstrap</span>
+        <span class="tag">MySQL</span>
+      </div>
+      <div class="project-links">
+        <a href="#" target="_blank">🔗 Demo</a>
+        <a href="#" target="_blank">💻 Code</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <h3>Site Réservation Hôtel</h3>
+        <span class="project-tag">Web App</span>
+      </div>
+      <p class="project-desc">
+        Plateforme de réservation d’hôtels avec gestion des chambres et utilisateurs.
+      </p>
+      <div class="project-tech">
+        <span class="tag">Symfony</span>
+        <span class="tag">JavaScript</span>
+        <span class="tag">MySQL</span>
+      </div>
+      <div class="project-links">
+        <a href="#" target="_blank">🔗 Demo</a>
+        <a href="#" target="_blank">💻 Code</a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-header">
+        <h3>Stock Management App</h3>
+        <span class="project-tag">Desktop</span>
+      </div>
+      <p class="project-desc">
+        Application de gestion de stock informatique (stage HCP).
+      </p>
+      <div class="project-tech">
+        <span class="tag">VB.Net</span>
+        <span class="tag">Access</span>
+      </div>
+      <div class="project-links">
+        <a href="#" target="_blank">🔗 Demo</a>
+        <a href="#" target="_blank">💻 Code</a>
+      </div>
+    </div>
+
+  </div>
+</section>
 
 
 <!-- SKILLS -->
