@@ -388,6 +388,20 @@
   border-bottom: 1px solid var(--rust);
 }
 
+.read-more{
+  background:#111;
+  color:white;
+  border:none;
+  padding:10px 20px;
+  border-radius:20px;
+  cursor:pointer;
+  margin-top:10px;
+}
+
+.read-more:hover{
+  opacity:0.8;
+}
+
 /* responsive */
 @media (max-width: 900px) {
   .projects-grid {
@@ -502,23 +516,78 @@
   <div class="projects-grid">
 
     <div class="project-card">
-      <div class="project-header">
-        <h3>Restaurant</h3>
-        <span class="project-tag">Full Stack</span>
-      </div>
-      <p class="project-desc">
-      le site de restaurant avec système de réservation, menu digital
-      </p>
-      <div class="project-tech">
-        <span class="tag">Laravel</span>
-        <span class="tag">React.js</span>
-        
-      </div>
+      <div class="project-card">
+  <div class="project-header">
+    <h3>Restaurant</h3>
+    <span class="project-tag">Full Stack</span>
+  </div>
+
+  <p class="project-desc">
+    Application Web de Gestion de Restaurant. 
+    Une solution complète permettant aux clients de découvrir le restaurant,
+    consulter le menu, voir la galerie, connaître l'histoire et réserver en ligne.
+
+    <span id="more-text" style="display:none;">
+      <br><br>
+
+      La plateforme contient deux parties principales :
+
+      <br><br>
+      <strong>Partie Client :</strong><br>
+      - Présentation du restaurant et de son expérience.<br>
+      - Consultation des menus et des plats.<br>
+      - Galerie photos.<br>
+      - Réservation en ligne.
+
+      <br><br>
+
+      <strong>Partie Administration :</strong><br>
+      - Gestion des menus et des plats.<br>
+      - Gestion des catégories de produits.<br>
+      - Gestion des commandes.<br>
+      - Gestion des clients.<br>
+      - Gestion des réservations.<br>
+      - Tableau de bord administrateur.<br>
+      - Authentification et gestion des utilisateurs.
+    </span>
+  </p>
+
+  <button class="read-more" onclick="showMore()" id="btn-more">
+    Lire plus
+  </button>
+
+  <div class="project-tech">
+    <span class="tag">Laravel</span>
+    <span class="tag">React.js</span>
+    <span class="tag">MySQL</span>
+  </div>
+
+</div>
+
+
       <div class="project-links">
-        <a href="#" target="_blank">🔗 Demo</a>
+        <a href="https://cute-kringle-c69d15.netlify.app/" target="_blank">🔗 Demo</a>
       </div>
     </div>
 
+    
+<script>
+function showMore() {
+
+  let text = document.getElementById("more-text");
+  let btn = document.getElementById("btn-more");
+
+  if(text.style.display === "none"){
+    text.style.display = "inline";
+    btn.innerHTML = "Lire moins";
+  }
+  else{
+    text.style.display = "none";
+    btn.innerHTML = "Lire plus";
+  }
+
+}
+</script>
     
     <div class="project-card">
       <div class="project-header">
